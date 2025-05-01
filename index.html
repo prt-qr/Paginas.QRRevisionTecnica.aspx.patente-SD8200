@@ -1,0 +1,201 @@
+<html lang="es"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validación de Documento QR - Municipalidad de Cerro Navia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #fff;
+            text-align: center;
+            transition: background 0.3s ease-in-out;
+        }
+        .loader-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .loader {
+            border: 6px solid rgba(255, 255, 255, 0.3);
+            border-top: 6px solid #ffeb3b;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .container {
+            display: none;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        .container h1 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        .highlight {
+            font-weight: 700;
+            color: #ffeb3b;
+        }
+        .qr-code img {
+            width: 140px;
+            height: 140px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out;
+        }
+        .qr-code img:hover {
+            transform: scale(1.1);
+        }
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 10px auto;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            color: #fff;
+            background: #ff9800;
+            padding: 12px 24px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(255, 152, 0, 0.5);
+            cursor: pointer;
+            width: 90%;
+        }
+        .btn:hover {
+            background: #e68900;
+            box-shadow: 0 6px 18px rgba(255, 152, 0, 0.7);
+            transform: translateY(-3px);
+        }
+        .floating-buttons {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .floating-buttons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #25D366;
+            color: #fff;
+            font-size: 24px;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out;
+        }
+        .floating-buttons a:hover {
+            transform: scale(1.1);
+        }
+        .floating-buttons .email {
+            background: #d44638;
+        }
+        .contact-message {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #ffeb3b;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="loader-container" id="loaderContainer" style="display: none;">
+        <div class="loader"></div>
+    </div>
+
+    <div class="container" id="infoContainer" style="display: block;">
+        <h1>Validación de Documento QR <br> Municipalidad de Cerro Navia</h1>
+        <p>Estado: <span class="highlight">PAGADO</span></p>
+        <p>Municipalidad: <span class="highlight">Cerro Navia</span></p>
+        <p>Nro. Serie: <span class="highlight">81005</span></p>
+        <p>Código de Verificación: <span class="highlight">74819719005</span></p>
+        <div class="qr-code">
+            <img id="qrImage" src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&amp;data=https%3A%2F%2Fcerronavia.github.io%2Fvalidador%2F" alt="Código QR">
+        </div>
+        <p>Patente: <span class="highlight">ZY7685-5
+</span></p>
+        <p>Vehículo: <span class="highlight">FORD FIESTA FIRST 1.6</span></p>
+        <p>Propietario: <span class="highlight">CARLOS ANTONIO MONDACA FREZ</span></p>
+        <p>Último acceso: <span id="last-access">1/5/2025, 17:00:35</span></p>
+        <p>Penúltimo acceso: <span id="previous-access">30/4/2025, 12:01:55</span></p>
+        
+        <a href="https://cerronavia.github.io/validador.cl/" class="btn"><i class="fas fa-check-circle"></i> Valida el código de verificación aquí</a>
+        
+        <p class="contact-message">Si tienes alguna consulta sobre tu permiso de circulación, no dudes en contactarnos. Estamos disponibles a través de nuestros canales oficiales:</p>
+        <p class="contact-message">📧 <strong>Email:</strong> cerronaviacontacto@gmail.com</p>
+        <p class="contact-message">📱 <strong>WhatsApp:</strong> +56 9 4463 9154</p>
+    </div>
+
+    <div class="floating-buttons">
+        <a href="mailto:cerronaviacontacto@gmail.com" class="email"><i class="fas fa-envelope"></i></a>
+        <a href="https://wa.me/56944639154" class="whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    </div>
+
+    <script>
+        function updateAccessRecords() {
+            const lastAccessElement = document.getElementById('last-access');
+            const previousAccessElement = document.getElementById('previous-access');
+            const now = new Date().toLocaleString();
+
+            let lastAccess = localStorage.getItem('lastAccess') || 'Sin registros';
+            previousAccessElement.textContent = lastAccess;
+            
+            localStorage.setItem('lastAccess', now);
+            lastAccessElement.textContent = now;
+        }
+
+        function generateQRCode() {
+            const validationUrl = "https://cerronavia.github.io/validador/";
+            document.getElementById('qrImage').src = `https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=${encodeURIComponent(validationUrl)}`;
+        }
+
+        function showInfoAfterLoader() {
+            setTimeout(() => {
+                document.getElementById('loaderContainer').style.display = 'none';
+                document.getElementById('infoContainer').style.display = 'block';
+            }, 3000);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateAccessRecords();
+            generateQRCode();
+            showInfoAfterLoader();
+        });
+    </script>
+
+
+
+
+
+</body></html>
